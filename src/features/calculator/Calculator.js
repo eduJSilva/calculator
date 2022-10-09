@@ -1,191 +1,194 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import {
-  decrement,
-  increment,
   numero,
-  incrementAsync,
-  incrementIfOdd,
   selectCalculator,
-  selectEquation,
   selectDisplay,
-  selectSimbol,
   selectIncrement,
-  displayConcat,
   addDecimal,
   changeSimbol,
   ac,
-  suma,
   equal,
-  pushEquation
 } from './calculatorSlice';
 import styles from './Calculator.module.css';
 
 export function Calculator() {
   const count = useSelector(selectCalculator);
-  const equation = useSelector(selectEquation);
   const display = useSelector(selectDisplay);
   const increments = useSelector(selectIncrement);
-  const simbol = useSelector(selectSimbol);
   const dispatch = useDispatch();
-  const [incrementAmount, /*setIncrementAmount*/] = useState('2');
-
-  const incrementValue = Number(incrementAmount) || 0;
 
   return (
-    <div>   
-     <div><h6>{display}</h6></div>
-      <div className={styles.row}>
-        <div id="display">{increments}</div>
-      </div>
-
-
-      <div className={styles.row}>
-       {/* <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        /> */} 
-        <button
+    <div className={styles.calculator}>
+    <Card > 
+   
+   <div className={styles.calculatorscreen}>
+     <div>{display}</div>
+        <div className={styles.display} id="display">{increments}</div>
+    </div>
+ <div className={styles.calculatorkeys}>
+      
+        <Button
+          type="button"
           id="clear"
           aria-label="clear-button"
-          className={styles.button}
+          className={styles.griditem1}
           onClick={() => dispatch(ac())}
         >
           AC
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="divide"
           aria-label="divide-button"
-          className={styles.asyncButton}
+          className="operator btn btn-info"
           onClick={() => dispatch(changeSimbol("/"))}
         >
           /
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="multiply"
           aria-label="multiply-button"
-          className={styles.button}
+          className="operator btn btn-info"
           onClick={() => dispatch(changeSimbol("x"))}
         >
           x
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="subtract"
           aria-label="subtract-button"
-          className={styles.button}
+          className="operator btn btn-info"
           onClick={() => dispatch(changeSimbol("-"))}
         >
           -
-        </button>
-        <button
+        </Button>
+        <Button
+          className="operator btn btn-info"
+          type="button"
           id="add"
           aria-label="add-button"
-          className={styles.button}
           onClick={() => dispatch(changeSimbol('+'))}
         >
           +
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="seven"
           aria-label="seven"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(7))}
         >
           7
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="eight"
           aria-label="eight"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(8))}
         >
           8
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="nine"
           aria-label="nine"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(9))}
         >
           9
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="six"
           aria-label="six"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(6))}
         >
           6
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="five"
           aria-label="five"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(5))}
         >
           5
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="four"
           aria-label="four"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() =>dispatch(numero(4))}
         >
           4
-        </button>
-        <button
-          id="one"
-          aria-label="one"
-          className={styles.button}
-          onClick={() => dispatch(numero(1))}
-        >
-          1
-        </button>
-        <button
-          id="two" 
-          aria-label="two"
-          className={styles.button}
-          onClick={() => dispatch(numero(2))}
-        >
-          2
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
           id="three"
           aria-label="three"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(3))}
         >
           3
-        </button>
-        <button
+        </Button>
+        <Button
+          type="button"
+          id="two" 
+          aria-label="two"
+          className="btn btn-light waves-effect"
+          onClick={() => dispatch(numero(2))}
+        >
+          2
+        </Button>
+       
+        <Button
+          type="button"
+          id="one"
+          aria-label="one"
+          className="btn btn-light waves-effect"
+          onClick={() => dispatch(numero(1))}
+        >
+          1
+        </Button>
+        <Button
+          type="button"
           id="zero"
           aria-label="zero"
-          className={styles.button}
+          className="btn btn-light waves-effect"
           onClick={() => dispatch(numero(0))}
         >
           0
-        </button>
-        <button  
+        </Button>
+        <Button  
+          type="button"
           id="decimal"
           aria-label="decimal"
-          className={styles.button}
+          className="decimal function btn btn-secondary"
           onClick={() => dispatch(addDecimal('.'))}
         >
           .
-        </button>
-        <button
+        </Button>
+        <Button
+          value="="
+          type="button"
           id="equals"
           aria-label="equals"
-          className={styles.button}
+          className="equal-sign operator btn btn-default"
           onClick={() => dispatch(equal(count))}
         >
           =
-        </button>
+        </Button>
 
-
-      </div>
+        </div>
+    </Card>
+    
     </div>
   );
 }
